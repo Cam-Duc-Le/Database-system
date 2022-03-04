@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>POS</title>
+
+   <!-- font awesome cdn link  -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+   <!-- custom css file link  -->
+   <link rel="stylesheet" href="css/style.css" type="text/css">
+</head>
+<body>
+    <header>
+        <a href="#" class="logo"><i class="fas fa-utensils"></i>Retail Management System</a>
+        <div id="menu-bar" class="fas fa-bars"></div>
+        <nav class="navbar">
+            <a href="#home">home</a>
+            <a href="#step-container">Instruction</a>
+            <a href="#order">Do query</a>
+        </nav>
+    </header>
+
+    <!-- home section starts  -->
+    <section class="home" id="home">
+
+        <div class="content">
+            <h3>Group 1 - DB assignment 2</h3>
+            <p>Demo for a SQL queries  app made by Cam, Duomg and Dung</p>
+        </div>
+        <div class="order_but"><a href="#order" class="btn">Go to query section</a></div>
+        <div class="image">
+            <img src="images/home-img.png" alt="">
+        </div>
+
+    </section>
+    <!-- home section ends -->   
+    
+    <!-- steps section starts  -->
+    <div class="step-container" id="step-container">
+        <h1 class="heading">Advantage of <span>our app!</span></h1>
+        <section class="steps">
+            <div class="box">
+                <img src="images/step-1.jpg" alt="">
+                <h3>manage store and warehouse easily</h3>
+            </div>
+            <div class="box">
+                <img src="images/step-2.jpg" alt="">
+                <h3>free and fast </h3>
+            </div>
+            <div class="box">
+                <img src="images/step-3.jpg" alt="">
+                <h3>beautiful UI</h3>
+            </div>
+            <div class="box">
+                <img src="images/step-4.jpg" alt="">
+                <h3>and finally, enjoy your product</h3>
+            </div>
+        </section>
+    </div>
+    <!-- steps section ends -->
+
+    <!-- order section starts  -->
+    <section class="order" id="order">
+        <h1 class="heading"> <span>Sql Query</span> Section </h1>
+        <div class="row">
+            <div class="image">
+                <img src="images/g-4.jpg" alt="">
+            </div>
+            <form id="action" action="http://localhost:5000/example" method="POST">
+                <div class="inputBox">
+                    <input type="text" placeholder="type of query" id="query" name="query" >
+                    <input type="text" placeholder="on table" id="table" name="table">
+                </div>
+                <div class="inputBox">
+                    <input type="text" placeholder="value" id="value" name="value">
+                    <input type="text" placeholder="condition" id="condition" name="condition">
+                </div>
+                <input type="submit" value="finish query" class="btn" id="orSend">
+            </form>
+        </div>
+    </section>
+    <!-- order section ends -->
+  
+    <!-- footer section  -->
+    <section class="footer">
+        <div class="share">
+            <a href="#" class="btn">facebook</a>
+            <a href="#" class="btn">twitter</a>
+            <a href="#" class="btn">instagram</a>
+            <a href="#" class="btn">pinterest</a>
+            <a href="#" class="btn">linkedin</a>
+            </div>
+        <div class="contact">Phone number: 9999999999</div>
+        <h1 class="credit"> Created By <span> Group 1  </span> | All Rights Seserved! </h1>
+    </section>
+    <!-- footer section end -->
+
+    <!-- scroll top button  -->
+    <a href="#home" class="fas fa-angle-up" id="scroll-top"></a>
+
+    <!-- custom js file link  -->
+    <script src="js/script.js"></script>
+</body>
+
+<script src="/socket.io/socket.io.js"> </script>
+<script> /* khoi  tao web socket*/
+        const socket = io();
+        const queryForm = document.querySelector('#action');
+        const query = document.querySelector('#query');
+        const table = document.querySelector('#table');
+        const value = document.querySelector('#value');
+        const condition = document.querySelector('#condition');
+        queryForm.addEventListener('submit',(e)=>{
+            e.preventDefault();
+            const message1 = query.value 
+            socket.emit('query',{message:message1});
+            query.value =''
+            const message2 = table.value 
+            socket.emit('table',{message:message2});
+            table.value =''
+            const message3 = value.value 
+            socket.emit('value',{message:message3});
+            value.value =''
+            const message4 = condition.value 
+            socket.emit('condition',{message:message4});
+            condition.value =''
+        })
+</script>
+
+</html>

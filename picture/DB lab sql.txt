@@ -1,0 +1,52 @@
+
+
+SELECT Fname,Lname  
+ FROM PROJECT AS P 
+ JOIN WORK_ON AS W ON P.Pnumber = W.Pno
+ JOIN EMPLOYEE AS E ON W.Essn = E.SSN
+ Where 
+ 	Hours >=10 AND Pname = 'ProductX';
+
+ SELECT Fname,Lname  
+ FROM EMPLOYEE AS E 
+ JOIN DEPENDENT AS D ON (E.Fname = D.dependent_name AND E.SSN = D.essn);
+
+SELECT Fname,Lname 
+FROM EMPLOYEE AS E1  
+JOIN (SELECT SSN FROM EMPLOYEE AS E  WHERE E.Fname='Franklin' AND E.Lname='Wong') 
+AS E2 ON (E1.Super_ssn = E2.SSN );
+
+7.5:
+  a) SELECT Dname, count(*)
+	From DEPARTMENT, EMPLOYEE
+	WHERE Dno = Dnumber
+	HAVING AVG(Salary)>30000
+	GROUP BY Dname
+  b) SELECT DNAME, COUNT (*)
+	FROM DEPARTMENT, EMPLOYEE
+	WHERE DNUMBER=DNO AND SEX='M' AND DNO IN ( 
+		SELECT DNO
+		FROM EMPLOYEE
+		GROUP BY DNO
+		HAVING AVG (SALARY) > 30000 )
+	GROUP BY DNAME
+
+7.7:
+     a) SELECT LNAME 
+	FROM EMPLOYEE 
+	WHERE Dno = (SELECT Dno FROM EMPLOYEE WHERE Salary
+			(SELECT max(Salary) FROM EMPLOYEE))
+     b) SELECT LNAME
+	FROM EMPLOYEE as E
+	WHERE Super_ssn IN (SELECT Ssn FROM EMPLOYEE WHERE ssn = 88866555)
+     c)
+
+
+
+
+
+
+
+
+
+ 
